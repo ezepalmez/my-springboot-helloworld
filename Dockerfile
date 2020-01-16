@@ -1,13 +1,10 @@
+# Start with a base image containing Java runtime
 FROM openjdk:8-jre-alpine
-LABEL maintainer="ezepalmez@gmail.com"
+# Add Maintainer Info
+MAINTAINER "ezpalmez@gmail.com"
 
-ENV APP_ROOT /app
+COPY target/helloworld.jar /usr/app/
 
-RUN mkdir ${APP_ROOT}
-
-WORKDIR ${APP_ROOT}
-
-COPY target/*.jar ${APP_ROOT}/helloworld.jar
-COPY config ${APP_ROOT}/config/
-
-ENTRYPOINT ["java", "-jar", "helloworld.jar"]
+WORKDIR /usr/app
+# Run the jar file 
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","helloworld.jar"]
