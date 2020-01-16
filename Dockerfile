@@ -12,4 +12,7 @@ WORKDIR ${APP_ROOT}
 #Docker comprueba periódicamente el estado de salud de nuestro contenedor
 HEALTHCHECK CMD curl --fail http://127.0.0.1:10000 || exit
 # Run the jar file 
-ENTRYPOINT ["java","-cp","app:app/lib/*","helloworld.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","helloworld.jar"]
+
+#ENTRYPOINT ["java","-cp","app:app/lib/*","helloworld.jar"]   ## con folder target generado
+
